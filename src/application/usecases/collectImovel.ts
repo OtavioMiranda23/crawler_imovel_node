@@ -2,9 +2,10 @@ import { Builder, By, until } from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
 import "chromedriver";
 import ImovelEntity from "../../domain/entities/imovelEntity";
+import ImovelRepository from "../../infra/database/repositories/imovelRepository";
 
 export default class CollectImovel {
-  constructor(imovelRepository: ImovelRepository);
+  constructor(readonly imovelRepository: ImovelRepository) {}
   public async execute(url: string): Promise<ImovelEntity[]> {
     console.log("Iniciando o navegador...");
     // Configuração do Chrome

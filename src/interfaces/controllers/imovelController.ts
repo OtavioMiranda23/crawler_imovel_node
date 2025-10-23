@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import ImovelEntity from "../../domain/entities/imovelEntity";
 import CollectImovel from "../../application/usecases/collectImovel";
 
-export default class ImoveisController {
+export default class ImovelController {
   constructor(readonly collectImovel: CollectImovel) {}
   public async getAllImoveis(
     req: Request,
