@@ -2,10 +2,9 @@ import { Builder, By, until } from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
 import "chromedriver";
 import ImovelEntity from "../../domain/entities/imovelEntity";
-import ImovelRepository from "../../infra/database/repositories/imovelRepository";
 
-export default class CollectImovel {
-  constructor(readonly imovelRepository: ImovelRepository) {}
+export default class CollectImoveis {
+  constructor() {}
   public async execute(url: string): Promise<ImovelEntity[]> {
     console.log("Iniciando o navegador...");
     // Configuração do Chrome
@@ -55,15 +54,15 @@ export default class CollectImovel {
           throw new Error("Endereço não encontrado");
         }
         const endereco = await lastEnderecoElement.getText();
-        const imovel = new ImovelEntity(
+        const imovel = ImovelEntity.create({
           endereco,
           valorTotalRaw,
-          true,
-          "Quinto Andar",
+          disponivel: true,
+          site: "Quinto Andar",
           link,
-          2,
-          metragemRaw
-        );
+          qtdQuartos: 2,
+          metragemRaw,
+        });
         imoveis.push(imovel);
       }
       await driver.quit();
